@@ -1,0 +1,7 @@
+# Ignore .env files
+**/.env
+
+# Local dev files
+._*
+.idea
+*~
