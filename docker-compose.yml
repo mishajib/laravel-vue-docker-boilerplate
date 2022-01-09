@@ -76,10 +76,24 @@ services:
     networks:
       - mi-network
 
+  # PHPMyAdmin Setup
+  phpmyadmin:
+    image: phpmyadmin:5.1.0-apache
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8200:80
+    environment:
+      PMA_HOST: mi-mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: 123123123
+    networks:
+      - mi-network
+
 # networks
 networks:
   mi-network:
-    name: mi-network
     driver: bridge
     driver_opts:
       com.docker.network.bridge.host_binding_ipv4: "${LISTEN_IP}"
@@ -87,5 +101,4 @@ networks:
 # volume to store DB files
 volumes:
   dbdata:
-    name: dbdata
     driver: local
